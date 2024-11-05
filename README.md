@@ -1,2 +1,2 @@
 # chipover
-A set of tools for summarizing, analyzing, and interpreting ChIP-Seq and RNA-Seq experiments. The toolkit centers on chipsummary for detailed ChIP-Seq data summaries and chipover for region intersection analysis.
+A toolkit for summarizing, analyzing, and interpreting ChIP-Seq and RNA-Seq experiments. It provides modules for data summarization, region intersection analysis, and normalization, along with utilities for Venn diagram generation, filtering, and coverage adjustments, supporting efficient analysis of epigenetic markers and gene expression across diverse conditions
