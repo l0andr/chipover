@@ -1,0 +1,12 @@
+seaborn
+matplotlib
+numpy
+pandas
+scikit-learn
+tqdm
+pybedtools
+pyranges
+pyrle
+ray
+venn
+matplotlib-venn
