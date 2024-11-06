@@ -7,34 +7,30 @@ A command-line toolkit for summarizing, analyzing, and interpreting ChIP-Seq and
 
 ## Features 
 
-### 1. Creation of Common Summary Tables
-- Compiles ChIP-Seq results into a unified summary table, allowing easy comparison of peaks across multiple samples.
-(**chipsummary tool**)
+- **Combining Results Across Samples**  
+  Uses combinatorial logic to summarize overlapping peaks across a set of samples and conditions. Computes basic statistics on the number of peaks with different enrichment conditions across all samples, with the option to consider additional intersections (e.g., with cell lines). Outputs results in BED format, allowing users to create outputs such as: "BED file with regions differentially enriched in tumor samples and also present in a given cell line, marked as Super Enhancer," or for promoters, normal samples, HPV-related samples, and so on.  
+  (**chipover tool**)
 
-### 2. Combining Results Across Samples
-- Uses combinatorial logic to analyze and summarize overlapping and unique peaks across a set of samples and conditions 
-(**chipsummary,chipover tools**)
+- **Creation of Common Summary Tables**  
+  Compiles ChIP-Seq results into a unified table, allowing easy comparison of peaks across multiple samples, integrating everything, including intersections with cell lines, DiffBind results, etc.  
+  (**chipsummary tool**)
 
-### 3. Integration with RNA-Seq Data
-- Provides joint analysis of ChIP-Seq and RNA-Seq data to correlate enrichment patterns with gene expression.
-(**chiprnacombiner tool**)
+- **Integration with RNA-Seq Data**  
+  Provides joint analysis of ChIP-Seq and RNA-Seq data to correlate enrichment patterns with gene expression.  
+  (**chiprnacombiner tool**)
 
-### 4. Designed for Super Enhancer analysis in tumor-sampels pairs
-- Provides joint analysis of Super Enhancer resions \ differently enriched promoter regions as well gene expression data
-(**chiprnacombiner tool**)
+- **Designed for Super Enhancer Analysis in Tumor-Sample Pairs**  
+  Enables joint analysis of Super Enhancer regions, differentially enriched promoter regions, and gene expression data.  
+  (**chiprnacombiner tool**)
 
-### 5. Provide a list of genes  
-- Provide list of genes around differentely enriched regions, near to differentely enriched promoters and upregulated
-(**chipsummary tool**)
+- **Provide a List of Genes**  
+  Generates a list of genes around differentially enriched regions, near differentially enriched promoters, and upregulated genes.  
+  (**chipsummary tool**)
 
-### 6. Compare results with other set of regions and list of genes   
-- Allow compare of derived differentialy enriched domains with other set of regions (for example differentialy enriched regions in cell lines)
-  and compare list of genes with additional list of genes (again, for example, list of genes pverexpressed in cell lines)
-(**chiprnacombiner tool**)
-
-
-
-
+- **Compare Results with Other Sets of Regions and Gene Lists**  
+  Allows comparison of derived differentially enriched domains with other sets of regions (e.g., differentially enriched regions in cell lines) and compares lists of genes with additional gene lists (e.g., genes overexpressed in cell lines).  
+  (**chiprnacombiner tool**)
+  
 ## Installation
 
 Before installing, ensure you have the following:
