@@ -187,7 +187,15 @@ if __name__ == '__main__':
         intersect = PyRangeSE.intersect(interval, how='first', invert=False,nb_cpu=MaxCPU)
 
         list_of_samples = sorted(intersect.df['SampleID'].unique().tolist())
-        list_of_condition = sorted(intersect.df['Condition'].unique().tolist())
+        if args.cov_threshold > 0.0:
+            list_of_conditions=[]
+            #If row['Coverage'] < intersected regions coverage * args.cov_threshold then we will add this condition to list_of_conditions
+            for inter_index, inter_row in intersect.df.iterrows():
+                if row['Coverage'] < inter_row['Coverage']*args.cov_threshold:
+                    list_of_conditions.append(inter_row['Condition'])
+            list_of_conditions = sorted(list(set(list_of_conditions)))
+        else:
+            list_of_condition = sorted(intersect.df['Condition'].unique().tolist())
         dftmp.loc[index,'Samples'] = ",".join(list_of_samples)
         dftmp.loc[index,'Conditions'] = ",".join(list_of_condition)
         dftmp.loc[index, 'Genes'] = ",".join(list_of_genes)
