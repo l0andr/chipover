@@ -187,7 +187,7 @@ It enables analysis of differential enrichment conditions across samples, provid
 
 Example:<br>
 ```
-
+python chiprnacombiner.py -indir $WORKDIR -chipseq_file se_report.csv -chipseq_promoter_file promoter_report.csv -rna_enrich_file prospective_DE_results005_1LFC.csv -rna_celllines_file "cell_line047_upreg.csv,cell_line090_upreg.csv,cell_line147_upreg.csv" -output_file "se_report_with_promoter_upreg.csv" -output_pdf "specifity_statistics.pdf" -gene_name_col "lbl"
 ```
 
 <details>
