@@ -92,6 +92,10 @@ if __name__ == '__main__':
     coverage_files = []
     if args.cov_threshold > 0.0:
         coverage_files = metadata['Coverage'].to_list()
+    if len(args.intersection_dir) > 0:
+        intersection_files = glob.glob(args.intersection_dir + '/*.bed')
+        if len(intersection_files) == 0:
+            raise RuntimeError(f"No files found in {args.intersection_dir} with mask {args.file_mask}")
     if args.verbose > 0:
         print(f"Input directory:{args.indir}")
         print(f"Output directory:{args.outdir}")
@@ -245,6 +249,7 @@ if __name__ == '__main__':
 
     if len(args.intersection_dir) > 0:
         intersection_files = glob.glob(args.intersection_dir + '/*.bed')
+
         PyRangesIntersect = {}
 
         for f in tqdm.tqdm(intersection_files, desc="Read files and construct PyRanges objects",
