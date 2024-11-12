@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import argparse
 import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 import warnings
@@ -87,6 +88,7 @@ if __name__ == '__main__':
         filter_bed = pyranges.read_bed(args.filter_regions)
 
     allowed_files = list(set(metadata['filename'].to_list()))
+
     coverage_files = []
     if args.cov_threshold > 0.0:
         coverage_files = metadata['Coverage'].to_list()
@@ -107,9 +109,17 @@ if __name__ == '__main__':
     diffbind_regions = None
     if args.diffbind_regions != "":
         diffbind_regions = pyranges.read_bed(args.diffbind_regions)
+    if len(input_files) == 0:
+        raise RuntimeError(f"No files found in {args.indir} with mask {args.file_mask}")
+    if args.verbose > 1:
+        for f in allowed_files:
+            if f not in input_files:
+                print(f"File {f} from metadata table are not found in {args.indir} with mask {args.file_mask}")
 
     for f in tqdm.tqdm(input_files, desc="Read files and construct PyRanges objects",disable= args.verbose!=1):
         if os.path.basename(f) not in allowed_files:
+            if args.verbose > 1:
+                print(f"Skip file {f} not in table with metadata")
             continue
 
         rdf = pyranges.read_bed(f).df
