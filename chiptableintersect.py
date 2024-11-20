@@ -12,10 +12,10 @@ import glob
 import tqdm
 from itertools import combinations
 import pyranges
-
+from version import __version__
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description="ChipTableInterset - Tool to add additional columns to chipsummary table by intersecting with bed-like files",
+        description=f"ChipTableInterset(ver {__version__}) - Tool to add additional columns to chipsummary table by intersecting with bed-like files",
         formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument("-input_table", help="Input table", type=str,
                         required=True)

@@ -7,6 +7,7 @@ from typing import List,Dict
 from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.pyplot as plt
 import argparse
+from version import __version__
 
 def compute_specifity_statistics(df:pd.DataFrame)->Dict[str,Dict[int,int]]:
     """
@@ -78,7 +79,7 @@ def plot_specifity_statistics(specifity_statistics:Dict[str,Dict[int,int]],title
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description="ChipRnaCombiner - Tool for combine ChipSeq and RNASeq results to find genes that are controled by Super Enhancers\ Enhancers and\or have enrichment in promotor regions and are upregulated in RNASeq",
+        description=f"ChipRnaCombiner(ver {__version__}) - Tool for combine ChipSeq and RNASeq results to find genes that are controled by Super Enhancers\ Enhancers and\or have enrichment in promotor regions and are upregulated in RNASeq",
         formatter_class=argparse.RawTextHelpFormatter)
 
     parser.add_argument("-indir", help="Directory with input files", type=str,

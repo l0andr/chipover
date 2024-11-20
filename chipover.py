@@ -11,6 +11,8 @@ from pybedtools import BedTool
 from itertools import combinations
 import pyranges
 
+from version import __version__
+
 def get_combinations(input_list):
     all_combinations = []
     for r in range(1, len(input_list) + 1):
@@ -21,7 +23,7 @@ def get_combinations(input_list):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(
-        description="ChipOver - Tool for compute common domain structure by overlap enchancers regions detected by LILY",
+        description=f"ChipOver(ver {__version__}) - Tool for compute common domain structure by overlap enchancers regions detected by LILY",
         formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument("-indir", help="Directory with input bed files", type=str,
                         required=True)

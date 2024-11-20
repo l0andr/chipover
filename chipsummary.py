@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import argparse
 import os
-
+from version import __version__
 import matplotlib.pyplot as plt
 import numpy as np
 import warnings
@@ -23,10 +23,11 @@ def get_combinations(input_list):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(
-        description="ChipSummary - Tool for creation common summary table for ChIP-Seq results",
+        description=f"ChipSummary(ver. {__version__}) - Tool for creation common summary table for ChIP-Seq results",
         formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument("-indir", help="Directory with input bed files", type=str,
                         required=True)
+
     parser.add_argument("-file_mask", help="Input file mask. Default value '*.bed' ", type=str, default="*.bed")
     parser.add_argument("-out_perfix", help="Output file name perfix. Output filename format [out_perfix]_[type_of_regions]_report.csv", type=str, default="")
 
@@ -65,6 +66,9 @@ if __name__ == '__main__':
 
     parser.add_argument("-verbose", help="Log level: 0 - error, 1 - info, 2 - debug  ", type=int,default=1)
     args = parser.parse_args()
+
+    if args.verbose > 0:
+        print(f"ChipSummary(ver. {__version__}) - Tool for creation common summary table for ChIP-Seq results")
 
     input_files = glob.glob(args.indir + '/' + args.file_mask)
 

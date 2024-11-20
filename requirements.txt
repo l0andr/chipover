@@ -10,3 +10,4 @@ pyrle
 ray
 venn
 matplotlib-venn
+bump2version
