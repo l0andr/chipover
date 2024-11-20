@@ -233,3 +233,46 @@ python chiprnacombiner.py -indir $WORKDIR -chipseq_file se_report.csv -chipseq_p
   Output PDF file path for optional visualizations.
 
 </details>
+
+**ChipTableIntersect**
+
+ChipTableIntersect is a tool designed to enhance the ChipSummary table by intersecting it with BED-like files. It enables users to add additional columns to the input table by computing intersections based on genomic regions and integrates relevant data from the intersecting table. This is useful for annotating or filtering ChIP-Seq results with data from other genomic studies.
+
+Example:<br>
+```bash
+python chiptableintersect.py -input_table chip_summary.csv -intersect_table annotations.bed -output intersected_table.csv --chr_col "Chromosome" --start_col "Start" --end_col "End" --match_col "match_flag" --add_cols "GeneName,ExpressionLevel"
+```
+<details>
+  <summary>ChipTableIntersect parameters description</summary>
+  
+- **`-input_table`** (required):  
+  Path to the input table (e.g., ChipSummary table).
+
+- **`-intersect_table`** (required):  
+  Path to the table or file with genomic regions to intersect.
+
+- **`-output`** (required):  
+  Output file path for the resulting intersected table.
+
+- **`--chr_col`** (optional, default = `"Chromosome"`):  
+  Name of the column in both input and intersect tables containing chromosome information.
+
+- **`--start_col`** (optional, default = `"Start"`):  
+  Name of the column in both input and intersect tables containing the start position of regions.
+
+- **`--end_col`** (optional, default = `"End"`):  
+  Name of the column in both input and intersect tables containing the end position of regions.
+
+- **`--match_col`** (optional, default = intersect table file name):  
+  Name of the column to flag matches in the output table.
+
+- **`--add_cols`** (optional, default = `""`):  
+  List of columns (comma-separated) from the intersect table to add to the output when matches occur.
+
+- **`-verbose`** (optional, default = `1`):  
+  Log level:  
+  - `0`: Error messages only  
+  - `1`: Basic information messages (default)  
+  - `2`: Debug-level messages  
+
+</details>
