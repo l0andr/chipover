@@ -1,8 +1,5 @@
 import argparse
 import os
-from sre_parse import parse
-
-import matplotlib.pyplot as plt
 import numpy as np
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
@@ -10,7 +7,6 @@ import pandas as pd
 from copy import deepcopy
 import glob
 import tqdm
-from itertools import combinations
 import pyranges
 from version import __version__
 if __name__ == '__main__':
@@ -22,7 +18,7 @@ if __name__ == '__main__':
     parser.add_argument("-intersect_table", help="Intersect table", type=str,
                         required=True)
     parser.add_argument("-output", help="Output table", type=str, required=True)
-
+    parser.add_argument("--delimiter", help="Output table", type=str, default=",")
     parser.add_argument("--chr_col", help="Column with chromosome", type=str, default="Chromosome")
     parser.add_argument("--start_col", help="Column with start position", type=str, default="Start")
     parser.add_argument("--end_col", help="Column with end position", type=str, default="End")
@@ -31,15 +27,20 @@ if __name__ == '__main__':
     parser.add_argument("-verbose", help="Log level: 0 - error, 1 - info, 2 - debug  ", type=int,default=1)
     args = parser.parse_args()
 
-    input_table = pd.read_csv(args.input_table, sep=",")
-    intersect_table = pd.read_csv(args.intersect_table, sep=",")
+    input_table = pd.read_csv(args.input_table, sep=args.delimiter)
+    intersect_table = pd.read_csv(args.intersect_table, sep=args.delimiter)
     if args.match_col == "":
         args.match_col = os.path.basename(args.intersect_table)
     adds_cols = []
     if args.add_cols != "":
         adds_cols = args.add_cols.split(",")
+    try:
+        pr_input=pyranges.PyRanges(input_table)
+    except Exception as e:
+        print(input_table.columns)
+        print(input_table.info())
+        raise RuntimeError(f"Error during creation of PyRanges object from input table: {e}")
 
-    pr_input=pyranges.PyRanges(input_table)
     #rename in intersect table args.chr_col to Chromosome, args.start_col to Start, args.end_col to End
     intersect_table=intersect_table.rename(columns={args.chr_col: 'Chromosome', args.start_col: 'Start', args.end_col: 'End'})
     for col in adds_cols:
